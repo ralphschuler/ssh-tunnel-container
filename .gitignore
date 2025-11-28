@@ -1,0 +1,11 @@
+# Ignore build artifacts and IDE files
+.DS_Store
+*.log
+__pycache__/
+env/
+node_modules/
+.venv/
+.vscode/
+.idea/
+# Ignore local Docker config
+.docker/
