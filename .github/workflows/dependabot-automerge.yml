@@ -1,0 +1,35 @@
+name: Dependabot auto-merge
+
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+      - labeled
+
+jobs:
+  automerge:
+    # Only run if the PR is from Dependabot
+    if: >-
+      github.actor == 'dependabot[bot]' || github.actor == 'dependabot-preview[bot]'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Enable Pull Request Auto-Merge
+        uses: peter-evans/enable-pull-request-automerge@v2
+        with:
+          pull-request-number: ${{ github.event.pull_request.number }}
+          repository: ${{ github.repository }}
+          merge-method: squash
+
+      - name: Auto-merge Dependabot pull request
+        uses: ahmadnassri/action-dependabot-auto-merge@v3
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          strategy: squash
