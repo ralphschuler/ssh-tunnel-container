@@ -1,0 +1,23 @@
+host: vps.example.com
+port: 22
+user: ralph
+identityFile: /ssh/id_ed25519
+
+sshOptions:
+  - "-o"
+  - "ServerAliveInterval=60"
+  - "-o"
+  - "ServerAliveCountMax=3"
+  - "-o"
+  - "ExitOnForwardFailure=yes"
+
+tunnels:
+  - localPort: 8080
+    remoteHost: localhost
+    remotePort: 80
+    bindAddress: 127.0.0.1
+
+  - localPort: 8443
+    remoteHost: localhost
+    remotePort: 443
+    bindAddress: 127.0.0.1
