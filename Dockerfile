@@ -1,4 +1,4 @@
-FROM alpine:3.20
+FROM alpine:3.22
 
 # Install minimal packages: bash for scripting, openssh-client for SSH, and yq for YAML parsing
 RUN apk add --no-cache \
